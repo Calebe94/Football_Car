@@ -16,26 +16,27 @@
 /*
     Motor 1 specific attributes
 */
-#define MOTOR_1_GPIO     GPIO_NUM_18
-#define MOTOR_1_CHANNEL  LEDC_CHANNEL_0
-#define MOTOR_1_A        GPIO_NUM_16
-#define MOTOR_1_B        GPIO_NUM_15
+#define MOTOR_LEFT_GPIO     GPIO_NUM_18
+#define MOTOR_LEFT_CHANNEL  LEDC_CHANNEL_0
+#define MOTOR_LEFT_A        GPIO_NUM_16
+#define MOTOR_LEFT_B        GPIO_NUM_15
 
 /*
     Motor 2 specific attributes
 */
-#define MOTOR_2_GPIO     GPIO_NUM_19
-#define MOTOR_2_CHANNEL  LEDC_CHANNEL_1
-#define MOTOR_2_A        GPIO_NUM_17
-#define MOTOR_2_B        GPIO_NUM_23
+#define MOTOR_RIGHT_GPIO     GPIO_NUM_19
+#define MOTOR_RIGHT_CHANNEL  LEDC_CHANNEL_1
+#define MOTOR_RIGHT_A        GPIO_NUM_17
+#define MOTOR_RIGHT_B        GPIO_NUM_23
 
 /*******************************
 **************SPEED*************
 *******************************/
 
-#define LOW_SPEED       40
+#define LOW_SPEED       30
 #define MEDIUM_SPEED    50
 #define FAST_SPEED      75
+#define STOPPED         0
 
 /*******************************
 ************ENCODERS************

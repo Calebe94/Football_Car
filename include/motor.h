@@ -23,49 +23,49 @@ void motor_init();
 /*
     Initialize motor1
 */
-void motor_1_init();
+void motor_left_init();
 
 /*
     Initialize motor2
 */
-void motor_2_init();
+void motor_right_init();
 
 /*
     Set motor 1 Speed.
 */
-void motor_1_set_speed(uint8_t);
+void motor_left_set_speed(uint8_t);
 
 /*
     Set motor 2 Speed.
 */
-void motor_2_set_speed(uint8_t);
+void motor_right_set_speed(uint8_t);
 
 /*
     Makes motor 1 fowards
 */
-void motor_1_move_foward();
+void motor_left_move_foward();
 
 /*
     Makes motor 2 fowards
 */
-void motor_2_move_foward();
+void motor_right_move_foward();
 
 /*
     Makes motor 1 backwards
 */
-void motor_1_move_backward();
+void motor_left_move_backward();
 
 /*
     Makes motor 2 backwards
 */
-void motor_2_move_backward();
+void motor_right_move_backward();
 
 /*
     Makes motor 1 stop
 */
-void motor_1_stop();
+void motor_left_stop();
 
 /*
     Makes motor 2 stop
 */
-void motor_2_stop();
+void motor_right_stop();

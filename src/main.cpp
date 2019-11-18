@@ -5,114 +5,129 @@
 
 BluetoothSerial ESP_BT; //Object for Bluetooth
 // int incoming;
-int incoming;
+char incoming;
+bool speed_button_pressed = false;
 
-void switch_controller_actions(const int command_received)
+void button_released()
+{
+  if(speed_button_pressed)
+  {
+    motor_left_set_speed(MEDIUM_SPEED);
+    motor_right_set_speed(MEDIUM_SPEED+5);
+  }
+  else
+  {
+    motor_left_set_speed(STOPPED);
+    motor_right_set_speed(STOPPED);
+  }
+}
+
+void switch_controller_actions(const char command_received)
 {
   switch(command_received)
   {
-    case 0:
+    case 'a':
       // Left Button released
       Serial.println("Left Button released");
-      motor_1_stop();
-      motor_2_stop();
+      button_released();
       break;
-    case 1:
+    case 'b':
       // Left Button pressed
       Serial.println("Left Button pressed");
-      motor_2_set_speed(LOW_SPEED);
-      motor_1_stop();
-      motor_2_move_foward();
+      motor_left_set_speed(LOW_SPEED);
+      motor_left_move_foward();
+      motor_right_move_foward();
       break;
-    case 2:
+    case 'c':
       // Right Button released
       Serial.println("Right Button released");
-      motor_1_stop();
-      motor_2_stop();
+      button_released();
       break;
-    case 3:
+    case 'd':
       // Right Button pressed
       Serial.println("Right Button pressed");
-      motor_1_set_speed(LOW_SPEED);
-      motor_1_move_foward();
-      motor_2_stop();
+      motor_left_move_foward();
+      motor_right_set_speed(LOW_SPEED);
+      motor_right_move_foward();
       break;
-    case 4:
+    case 'e':
       // Up Button released
       Serial.println("Up Button released");
-      motor_1_stop();
-      motor_2_stop();
+      button_released();
       break;
-    case 5:
+    case 'f':
       // Up Button pressed
       Serial.println("Up Button pressed");
-      motor_1_set_speed(MEDIUM_SPEED);
-      motor_2_set_speed(MEDIUM_SPEED);
-      motor_1_move_foward();
-      motor_2_move_foward();
+      motor_left_move_foward();
+      motor_right_move_foward();
       break;
-    case 6:
+    case 'g':
       // Down Button released
       Serial.println("Down Button released");
-      motor_1_stop();
-      motor_2_stop();
+      button_released();
       break;
-    case 7:
+    case 'h':
       // Down Button pressed
       Serial.println("Down Button pressed");
-      motor_1_set_speed(MEDIUM_SPEED);
-      motor_2_set_speed(MEDIUM_SPEED);
-      motor_1_move_backward();
-      motor_2_move_backward();
+      motor_left_move_backward();
+      motor_right_move_backward();
       break;
-    case 8:
+    case 'i':
       // Square Button released
       Serial.println("Square Button released");
       break;
-    case 9:
+    case 'j':
       // Square Button pressed
       Serial.println("Square Button pressed");
       break;
-    // case 10:
-    //   // Circle Button released
-    //   Serial.println("Circle Button released");
-    //   break;
-    // case 11:
-    //   // Circle Button pressed 
-    //   Serial.println("Circle Button pressed");
-    //   break;
-    // case 12:
-    //   // Triangle Button released
-    //   Serial.println("Triangle Button released");
-    //   break;
-    // case 13:
-    //   // Triangle Button pressed
-    //   Serial.println("Triangle Button pressed");
-    //   break;
-    // case 14:
-    //   // Cross Button released
-    //   Serial.println("Cross Button released");
-    //   break;
-    // case 15:
-    //   // Cross Button pressed
-    //   Serial.println("Cross Button pressed");
-    //   break;
-    // case 16:
-    //   // Start Button released
-    //   Serial.println("Start Button released");
-    //   break;
-    // case 17:
-    //   // Start Button pressed
-    //   Serial.println("Start Button pressed");
-    //   break;
-    // case 18:
-    //   // Stop Button released
-    //   Serial.println("Stop Button released");
-    //   break;
-    // case 19:
-    //   // Stop Button pressed
-    //   Serial.println("Stop Button pressed");
-    //   break;
+    case 'k':
+      // Triangle Button released
+      Serial.println("Triangle Button released");
+      break;
+    case 'l':
+      // Triangle Button pressed
+      Serial.println("Triangle Button pressed");
+      break;
+    case 'm':
+      // Cross Button released
+      Serial.println("Cross Button released");
+      motor_left_set_speed(STOPPED);
+      motor_right_set_speed(STOPPED);
+      motor_left_stop();
+      motor_right_stop();
+      speed_button_pressed = false;
+      break;
+    case 'n':
+      // Cross Button pressed
+      Serial.println("Cross Button pressed");
+      motor_left_set_speed(MEDIUM_SPEED);
+      motor_right_set_speed(MEDIUM_SPEED+5);
+      speed_button_pressed = true;
+      break;
+    case 'o':
+      // Circle Button released
+      Serial.println("Circle Button released");
+      break;
+    case 'p':
+      // Circle Button pressed 
+      Serial.println("Circle Button pressed");
+      break;
+    case 'q':
+      // Start Button released
+      Serial.println("Start Button released");
+      break;
+    case 'r':
+      // Start Button pressed
+      Serial.println("Start Button pressed");
+      break;
+    case 's':
+      // Stop Button released
+      Serial.println("Stop Button released");
+      break;
+    case 't':
+      // Stop Button pressed
+      Serial.println("Stop Button pressed");
+      break;
     default:
       Serial.println("Command invalid");
       break;
@@ -138,9 +153,9 @@ void loop()
   {
     incoming = (char)ESP_BT.read(); //Read what we recevive 
 
-    Serial.print("Received:"); Serial.println(incoming-48);
+    Serial.print("Received:"); Serial.println(incoming);
     
-    switch_controller_actions(incoming-48);
+    switch_controller_actions(incoming);
   }
   delay(20);
 
